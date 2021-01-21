@@ -9,15 +9,18 @@ loadrt hostmot2
 loadrt hm2_eth board_ip="192.168.1.121" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=00xxxx" 
 setp    hm2_7i76e.0.watchdog.timeout_ns 5000000
 loadrt pid names=pid.x,pid.y,pid.z,pid.s
+loadrt or2
 
-addf hm2_7i76e.0.read          servo-thread
+addf hm2_7i76e.0.read         servo-thread
 addf motion-command-handler   servo-thread
 addf motion-controller        servo-thread
 addf pid.x.do-pid-calcs       servo-thread
 addf pid.y.do-pid-calcs       servo-thread
 addf pid.z.do-pid-calcs       servo-thread
 addf pid.s.do-pid-calcs       servo-thread
-addf hm2_7i76e.0.write         servo-thread
+addf hm2_7i76e.0.write        servo-thread
+addf or2.0		      servo-thread
+
 setp hm2_7i76e.0.dpll.01.timer-us -50
 setp hm2_7i76e.0.stepgen.timer-number 1
 
@@ -126,7 +129,10 @@ net y-enable     => hm2_7i76e.0.stepgen.01.enable
 
 # ---setup home / limit switch signals---
 
-net y-home-sw     =>  joint.1.home-sw-in
+net y-home-sw       <=  hm2_7i76e.0.7i76.0.0.input-09-not
+net y-home-sw       =>  joint.1.home-sw-in
+
+## These aren't used, we use software limits
 net y-neg-limit     =>  joint.1.neg-lim-sw-in
 net y-pos-limit     =>  joint.1.pos-lim-sw-in
 
@@ -262,7 +268,12 @@ net coolant-flood     <=  iocontrol.0.coolant-flood
 
 #  ---probe signal---
 
-net probe-in     =>  motion.probe-input
+net workprobe or2.0.in0 <= hm2_7i76e.0.7i76.0.0.input-12
+net toolprobe or2.0.in1 <= hm2_7i76e.0.7i76.0.0.input-13
+net toolprobecrash <= hm2_7i76e.0.7i76.0.0.input-14-not
+
+net probe-in => motion.probe-input <= or2.0.out
+#net probe-in => motion.probe-input <= hm2_7i76e.0.7i76.0.0.input-12
 
 #  ---motion control signals---
 
