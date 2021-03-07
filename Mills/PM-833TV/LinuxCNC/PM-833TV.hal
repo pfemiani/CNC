@@ -9,7 +9,8 @@ loadrt hostmot2
 loadrt hm2_eth board_ip="192.168.1.121" config=" num_encoders=1 num_pwmgens=0 num_stepgens=5 sserial_port_0=00xxxx" 
 setp    hm2_7i76e.0.watchdog.timeout_ns 5000000
 loadrt pid names=pid.x,pid.y,pid.z,pid.s
-loadrt or2
+loadrt and2 names=and2.vc,and2.wp
+loadrt or2 count=1
 
 addf hm2_7i76e.0.read         servo-thread
 addf motion-command-handler   servo-thread
@@ -19,6 +20,7 @@ addf pid.y.do-pid-calcs       servo-thread
 addf pid.z.do-pid-calcs       servo-thread
 addf pid.s.do-pid-calcs       servo-thread
 addf hm2_7i76e.0.write        servo-thread
+addf and2.wp		      servo-thread
 addf or2.0		      servo-thread
 
 setp hm2_7i76e.0.dpll.01.timer-us -50
@@ -268,7 +270,10 @@ net coolant-flood     <=  iocontrol.0.coolant-flood
 
 #  ---probe signal---
 
-net workprobe or2.0.in0 <= hm2_7i76e.0.7i76.0.0.input-12
+net workprobe-connect and2.wp.in0 <= hm2_7i76e.0.7i76.0.0.input-11
+net workprobe-probe and2.wp.in1 <= hm2_7i76e.0.7i76.0.0.input-12
+net workprobe or2.0.in0 <= and2.wp.out
+
 net toolprobe or2.0.in1 <= hm2_7i76e.0.7i76.0.0.input-13
 net toolprobecrash <= hm2_7i76e.0.7i76.0.0.input-14-not
 
