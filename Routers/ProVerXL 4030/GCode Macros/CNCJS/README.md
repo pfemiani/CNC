@@ -8,12 +8,12 @@
 ## Initial Setup
 1. Home the machine
 2. Put probe bar in spindle
-3. Position probe plate and connect magnet
-4. Probe Z on probe plate
-	TODO: Confirm that this zeros Z in the machine coordinates
-5. Position probe in probe plate hole
-6. Run ProbeHoleCenter macro
-7. Run LoadFirstTool macro
+3. Position probe plate and connect magnet to collet nut
+   * Touch plate to tool to verify probe circuit
+5. Move tool <1/4" over plate and select Probe Z in probing section of CNCjs (arrow keys, pg up/dwn)
+6. Position probe in probe plate hole
+7. Hold plate in place and run ProbeHoleCenter in macro section of CNCjs
+8. Run LoadFirstTool macro
 
 ## Run Program
 1. Run ChangeTool macro
