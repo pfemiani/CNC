@@ -17,7 +17,7 @@
 
 ## Run Program
 1. Run ChangeTool macro
-* While paused, put desired tool in spindle
+   * While paused, put desired tool in spindle
 2. Resume
 3. Upload g-code
 4. Cycle start
