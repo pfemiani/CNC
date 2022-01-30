@@ -9,8 +9,8 @@
 
 %global.state.SAFE_HEIGHT = -5 ; clear everything height(negative number, distance below Z limit)
 ;Following set probe location
-%global.state.PROBE_X_LOCATION = -16.5  ;machine coordinates
-%global.state.PROBE_Y_LOCATION = -293.500 ;machine coordinates
+%global.state.PROBE_X_LOCATION = -17.075  ;machine coordinates
+%global.state.PROBE_Y_LOCATION = -286.369 ;machine coordinates
 %global.state.PROBE_Z_LOCATION = -5   ;machine coordinates --> lower this (more negative) to start the probing closer to wasteboard
 
 %global.state.PROBE_DISTANCE = 110
