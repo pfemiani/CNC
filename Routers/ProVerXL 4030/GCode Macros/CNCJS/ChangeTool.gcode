@@ -18,6 +18,7 @@ G21 ; Use metric units
 M5  ; Stop spindle
 G90	; Absolute positioning
 
+G53 Z-5
 G28
 
 %wait
