@@ -32,8 +32,14 @@ This is described for Fusion 360 but applies to any CAM program
    c. After touching off, a pause dialog will open, click `Continue`
    
 ## Run Program
-1. Run ChangeTool macro
-   * While paused, put desired tool in spindle
-2. Resume
-3. Upload g-code
-4. Cycle start
+1. In CNCjs, click `Upload G-code` and select the desired program file
+2. Confirm that the program has a `G20` or `G21` at the top
+3. Confirm which tool the program is setup to use
+4. In the Macro section, run the `ChangeTool` macro
+   a. A dialog will open showing the routine, click `OK` or whatever
+   b. After moving above the tool length button, a pause dialog will open, leave it open
+   c. Put the tool identified in step 3 into the router
+   d. Go back to the open dialog and click `Continue`
+   c. After touching off, a pause dialog will open, click `Continue`
+5. Move the tip of the tool near the work to confirm that the work coordinate offsets for X, Y, and Z are correct
+7. In the Main section, click `Run`
