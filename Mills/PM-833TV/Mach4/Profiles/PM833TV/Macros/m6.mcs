@@ -1,0 +1,23 @@
+function m6()
+
+	local inst = mc.mcGetInstance()
+	local selectedTool = mc.mcToolGetSelected(inst)
+	selectedTool = math.tointeger(selectedTool)
+	local currentTool = mc.mcToolGetCurrent(inst)
+	currentTool = math.tointeger(currentTool)
+	
+	if selectedTool == currentTool then
+		mc.mcCntlSetLastError(inst, "Current tool == Selected tool so there is nothing to do")
+	else
+		--Remove this line if you would not like the Z axis to move
+		--mc.mcCntlGcodeExecute(inst, "G90 G53 G0 Z0.0");--Move the Z axis all the way up
+		mc.mcCntlSetLastError(inst, "Change to tool " .. tostring(selectedTool) .. " and press start to continue") --Message at beginning of tool change
+		mc.mcCntlToolChangeManual(inst, true) --This will pause the tool change here and wait for a press of cycle start to continue
+		mc.mcCntlSetLastError(inst, "Current tool == " .. tostring(selectedTool) .. "   Previous Tool == " .. tostring(currentTool)) --Message that shows after Cycle Start
+		mc.mcToolSetCurrent(inst, selectedTool)
+	end
+end
+
+if (mc.mcInEditor() == 1) then
+	m6()
+end
