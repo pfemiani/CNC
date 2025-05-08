@@ -1,9 +1,0 @@
-o<probe_check_sample> sub
-
-o<probe_check> call
-o<10> if [#<_value> EQ 0]
-  o<probe_check_sample> return  
-o<10> endif
-
-o<probe_check_sample> endsub
-M2

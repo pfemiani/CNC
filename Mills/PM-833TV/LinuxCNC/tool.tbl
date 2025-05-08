@@ -1,6 +1,0 @@
-;Tool  Pocket Z Offset     Diameter     Remark
-T1     P1     Z+0.000000   D+0.000000   ; Spindle Nose
-T2     P2     Z+4.041145   D+0.125000   ; Work Probe
-T104   P104   Z+3.027145   D+0.250000   ; 1/4" HSS EndMill
-T110   P110   Z+2.819645   D+0.250000   ; Spotting Drill
-T113   P113   Z+3.119478   D+0.250000   ; 1/4" V Bit
